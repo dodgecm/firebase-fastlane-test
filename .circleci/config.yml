@@ -1,0 +1,28 @@
+# iOS CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/ios-migrating-from-1-2/ for more details
+#
+version: 2
+jobs:
+
+    test:
+        macos:
+            xcode: '11.2.1'
+        shell: /bin/bash --login -eo pipefail
+        steps:
+            - checkout
+            - run:
+                name: Set Ruby Version
+                command:  echo "ruby-2.6" > ~/.ruby-version
+            - run:
+                name: Bundle install
+                command: bundle install            
+            - run: 
+                name: Run unit tests
+                command: bundle exec fastlane ios custom_lane
+
+workflows:
+    version: 2
+    feature:
+        jobs:
+            - test
