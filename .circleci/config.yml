@@ -16,7 +16,7 @@ jobs:
                 command:  echo "ruby-2.6" > ~/.ruby-version
             - run:
                 name: Bundle install
-                command: bundle install            
+                command: bundle install --path vendor/bundle
             - run: 
                 name: Run unit tests
                 command: bundle exec fastlane ios custom_lane
